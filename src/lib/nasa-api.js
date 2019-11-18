@@ -17,5 +17,11 @@ const URL = 'https://api.nasa.gov/planetary/apod';
  */
 export default async function getRandomImage() {
     const newImageURL = URL + '?api_key=' + API_KEY + '&date=' + randomDate();
-    
+    const result = await fetch(newImageURL);
+    if (result.status < 200 || result.status >= 400) {
+        console.error('Villa við að sækja gögn!');
+    } else {
+        const data = await result.blob();
+        return data;
+    }
 }
