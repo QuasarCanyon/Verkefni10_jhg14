@@ -1,3 +1,5 @@
+import getRandomImage from "./nasa-api";
+
 // todo vísa í rétta hluti með import
 
 // breytur til þess að halda utan um html element nodes
@@ -12,7 +14,20 @@ let image; // object sem inniheldur núverandi mynd á forsíðu.
  * ásamt titli og texta.
  */
 function getNewImage() {
+    const imageData = getRandomImage();
+    debugger;
+    title = imageData.title();
+    text = imageData.text();
+    img = imageData.img();
 
+    const imageElement = document.querySelector('.apod__image');
+    imageElement.setAttribute('src', img);
+
+    const titleElement = document.querySelector('.apod__title');
+    titleElement.appendChild(document.createTextNode(title));
+
+    const textElement = document.querySelector('.apod__text');
+    textElement.appendChild(document.createTextNode(text));
 }
 
 /*
@@ -27,7 +42,15 @@ function saveCurrentImage() {
  *
  */
 export default function init(apod) {
+    const newImageButton = document.querySelector('.button--new-image');
+    const saveImageButton = document.querySelector('.button--save-image');
+    const viewImageButton = document.querySelector('.button--view-img');
 
+    newImageButton.addEventListener('click', getNewImage);
+    saveImageButton.addEventListener('click', saveCurrentImage);
+    viewImageButton.addEventListener('click', loadFavourites);
+
+    getNewImage();
 }
 
 /*

@@ -48,7 +48,7 @@ export function randomDate() {
   const todayMonth = todayDate.getMonth() + 1;
   const todayDay = todayDate.getDate();
   const year = randomNumber(1995, todayYear);
-  const month;
+  let month;
   if (year === 1995) {
     month = randomNumber(6, 12);
   } else if (year === todayYear) {
@@ -56,7 +56,7 @@ export function randomDate() {
   } else {
     month = randomNumber(1, 12);
   }
-  const day;
+  let day;
   if (year === 1995 && month === 6) {
     day = randomNumber(16, 30);
   } else if (year === todayYear && month === todayMonth) {
