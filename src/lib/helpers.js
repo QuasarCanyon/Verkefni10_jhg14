@@ -38,3 +38,38 @@ export function el(name, ...children) {
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+/**
+ * Býr til dagsetningu af handahófi á forminu YYYY-MM-DD
+ */
+export function randomDate() {
+  const todayDate = new Date();
+  const todayYear = todayDate.getFullYear();
+  const todayMonth = todayDate.getMonth() + 1;
+  const todayDay = todayDate.getDate();
+  const year = randomNumber(1995, todayYear);
+  const month;
+  if (year === 1995) {
+    month = randomNumber(6, 12);
+  } else if (year === todayYear) {
+    month = randomNumber(1, todayMonth);
+  } else {
+    month = randomNumber(1, 12);
+  }
+  const day;
+  if (year === 1995 && month === 6) {
+    day = randomNumber(16, 30);
+  } else if (year === todayYear && month === todayMonth) {
+    day = randomNumber(1, todayDay);
+  } else if (year % 4 === 0 && month === 2) {
+    day = randomNumber(1, 29);
+  } else if (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12) {
+    day = randomNumber(1, 31);
+  } else if (month === 4 || month === 6 || month === 9 || month === 11) {
+    day = randomNumber(1, 30);
+  } else {
+    day = randomNumber(1, 28);
+  }
+  const pictureDate = year + '-' + month + '-' + day;
+  return pictureDate;
+}
