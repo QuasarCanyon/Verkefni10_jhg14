@@ -20,25 +20,31 @@ function getNewImage() {
  * Birtir mynd frá NASA API á forsíðunni ásamt titli og texta.
  */
   export function show(imageData) {
-  const title = imageData[0];
-  const img = imageData[1];
-  const text = imageData[2];
+  image = imageData;
+  title = imageData[0];
+  img = imageData[1];
+  text = imageData[2];
 
   const imageElement = document.querySelector('.apod__image');
   imageElement.setAttribute('src', img);
 
   const titleElement = document.querySelector('.apod__title');
-  titleElement.appendChild(document.createTextNode(title));
+  let titleNode = document.createTextNode(title);
+  titleElement.appendChild(titleNode);
+  titleElement.removeChild(titleNode.previousSibling);
 
   const textElement = document.querySelector('.apod__text');
-  textElement.appendChild(document.createTextNode(text));
+  let textNode = document.createTextNode(text);
+  textElement.appendChild(textNode);
+  textElement.removeChild(textNode.previousSibling);
 }
 
 /*
  * Vistar núverandi mynd í storage.
  */
 function saveCurrentImage() {
-  const savedNumber = window.Storage.length;
+  let nextSavedNumber = `${window.Storage.length}`;
+  window.localStorage.setItem(nextSavedNumber, image);
 }
 
 /*
