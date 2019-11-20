@@ -10,31 +10,35 @@ let img; // mynd á forsíðu
 let image; // object sem inniheldur núverandi mynd á forsíðu.
 
 /*
- * Sækir nýja Mynd af handahófi frá Nasa API og birtir hana á forsíðunni
- * ásamt titli og texta.
+ * Sækir nýja mynd af handahófi frá Nasa API.
  */
 function getNewImage() {
-    const imageData = getRandomImage();
-    debugger;
-    title = imageData.title();
-    text = imageData.text();
-    img = imageData.img();
+  getRandomImage();
+}
 
-    const imageElement = document.querySelector('.apod__image');
-    imageElement.setAttribute('src', img);
+/*
+ * Birtir mynd frá NASA API á forsíðunni ásamt titli og texta.
+ */
+  export function show(imageData) {
+  const title = imageData[0];
+  const img = imageData[1];
+  const text = imageData[2];
 
-    const titleElement = document.querySelector('.apod__title');
-    titleElement.appendChild(document.createTextNode(title));
+  const imageElement = document.querySelector('.apod__image');
+  imageElement.setAttribute('src', img);
 
-    const textElement = document.querySelector('.apod__text');
-    textElement.appendChild(document.createTextNode(text));
+  const titleElement = document.querySelector('.apod__title');
+  titleElement.appendChild(document.createTextNode(title));
+
+  const textElement = document.querySelector('.apod__text');
+  textElement.appendChild(document.createTextNode(text));
 }
 
 /*
  * Vistar núverandi mynd í storage.
  */
 function saveCurrentImage() {
-
+  const savedNumber = window.Storage.length;
 }
 
 /*
@@ -42,15 +46,15 @@ function saveCurrentImage() {
  *
  */
 export default function init(apod) {
-    const newImageButton = document.querySelector('.button--new-image');
-    const saveImageButton = document.querySelector('.button--save-image');
-    const viewImageButton = document.querySelector('.button--view-img');
+  const newImageButton = document.querySelector('.button--new-image');
+  const saveImageButton = document.querySelector('.button--save-image');
+  const viewImageButton = document.querySelector('.button--view-img');
 
-    newImageButton.addEventListener('click', getNewImage);
-    saveImageButton.addEventListener('click', saveCurrentImage);
-    viewImageButton.addEventListener('click', loadFavourites);
+  newImageButton.addEventListener('click', getNewImage);
+  saveImageButton.addEventListener('click', saveCurrentImage);
+  viewImageButton.addEventListener('click', loadFavourites);
 
-    getNewImage();
+  getNewImage();
 }
 
 /*

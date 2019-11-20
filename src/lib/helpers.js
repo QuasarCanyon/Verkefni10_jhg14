@@ -70,6 +70,12 @@ export function randomDate() {
   } else {
     day = randomNumber(1, 28);
   }
+  if (month < 10) {
+    month = '0' + month;
+  }
+  if (day < 10) {
+    day = '0' + day;
+  }
   const pictureDate = year + '-' + month + '-' + day;
   return pictureDate;
 }
